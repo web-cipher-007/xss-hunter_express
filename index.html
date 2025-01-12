@@ -62,26 +62,33 @@ img, .gif {
     margin: 1rem 0;
     border-radius: 10px;
 }
-button {
-    background-color: var(--accent-color-dark);
-    color: var(--bg-color-dark);
-    border: none;
-    padding: 0.5rem 1rem;
-    font-size: 1rem;
-    border-radius: 5px;
+.switch {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    display: flex;
+    align-items: center;
     cursor: pointer;
-    transition: background-color 0.3s, color 0.3s;
-}
-button:hover {
     background-color: var(--accent-color-dark);
-    filter: brightness(0.9);
+    border-radius: 15px;
+    padding: 5px;
+    width: 50px;
+    height: 25px;
+    transition: background-color 0.3s;
 }
-[data-theme="light"] {
-    --bg-color-dark: var(--bg-color-light);
-    --text-color-dark: var(--text-color-light);
-    --accent-color-dark: var(--accent-color-light);
-    --secondary-text-dark: var(--secondary-text-light);
-    --footer-color-dark: var(--footer-color-light);
+.switch-circle {
+    background-color: var(--bg-color-dark);
+    border-radius: 50%;
+    height: 20px;
+    width: 20px;
+    transition: transform 0.3s, background-color 0.3s;
+}
+[data-theme="light"] .switch {
+    background-color: var(--accent-color-light);
+}
+[data-theme="light"] .switch-circle {
+    background-color: var(--bg-color-light);
+    transform: translateX(25px);
 }
 @keyframes glow {
     from {
@@ -94,10 +101,12 @@ button:hover {
 </style>
 </head>
 <body>
+<div class="switch" id="themeToggle">
+    <div class="switch-circle"></div>
+</div>
 <h1>XSS Hunter Express</h1>
 <img src="https://media.giphy.com/media/26tn33aiTi1jkl6H6/giphy.gif" alt="Hacking Animation" class="gif">
 <p>The ultimate tool for finding and exploiting XSS vulnerabilities.</p>
-<button id="themeToggle">Switch to Light Mode</button>
 <footer>
 <p>Deployed by <strong>web.cipher</strong></p>
 </footer>
@@ -108,10 +117,8 @@ const body = document.body;
 themeToggle.addEventListener('click', () => {
     if (body.hasAttribute('data-theme')) {
         body.removeAttribute('data-theme');
-        themeToggle.textContent = 'Switch to Light Mode';
     } else {
         body.setAttribute('data-theme', 'light');
-        themeToggle.textContent = 'Switch to Dark Mode';
     }
 });
 </script>
