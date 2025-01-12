@@ -10,24 +10,27 @@
 <link href="https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
 :root {
-    --bg-color-dark: #0d1117;
-    --text-color-dark: #c9d1d9;
-    --accent-color-dark: #58a6ff;
-    --secondary-text-dark: #8b949e;
-    --footer-color-dark: #6e7681;
-
-    --bg-color-light: #ffffff;
-    --text-color-light: #24292e;
-    --accent-color-light: #0366d6;
-    --secondary-text-light: #586069;
-    --footer-color-light: #6a737d;
+    --bg-color: #0d1117;
+    --text-color: #c9d1d9;
+    --accent-color: #58a6ff;
+    --secondary-text: #8b949e;
+    --footer-color: #6e7681;
 }
+
+[data-theme="light"] {
+    --bg-color: #ffffff;
+    --text-color: #24292e;
+    --accent-color: #0366d6;
+    --secondary-text: #586069;
+    --footer-color: #6a737d;
+}
+
 body {
     font-family: 'SF Pro Display', sans-serif;
     margin: 0;
     padding: 0;
-    background-color: var(--bg-color-dark);
-    color: var(--text-color-dark);
+    background-color: var(--bg-color);
+    color: var(--text-color);
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -40,21 +43,21 @@ body {
 h1 {
     font-size: 3rem;
     margin: 0;
-    color: var(--accent-color-dark);
+    color: var(--accent-color);
     animation: glow 1.5s infinite alternate;
 }
 p {
     font-size: 1.2rem;
     margin: 1rem 0;
-    color: var(--secondary-text-dark);
+    color: var(--secondary-text);
 }
 footer {
     margin-top: 2rem;
     font-size: 0.9rem;
-    color: var(--footer-color-dark);
+    color: var(--footer-color);
 }
 footer strong {
-    color: var(--accent-color-dark);
+    color: var(--accent-color);
 }
 img, .gif {
     max-width: 100%;
@@ -69,7 +72,7 @@ img, .gif {
     display: flex;
     align-items: center;
     cursor: pointer;
-    background-color: var(--accent-color-dark);
+    background-color: var(--accent-color);
     border-radius: 15px;
     padding: 5px;
     width: 50px;
@@ -77,25 +80,24 @@ img, .gif {
     transition: background-color 0.3s;
 }
 .switch-circle {
-    background-color: var(--bg-color-dark);
+    background-color: var(--bg-color);
     border-radius: 50%;
     height: 20px;
     width: 20px;
     transition: transform 0.3s, background-color 0.3s;
 }
 [data-theme="light"] .switch {
-    background-color: var(--accent-color-light);
+    background-color: var(--accent-color);
 }
 [data-theme="light"] .switch-circle {
-    background-color: var(--bg-color-light);
     transform: translateX(25px);
 }
 @keyframes glow {
     from {
-        text-shadow: 0 0 10px var(--accent-color-dark), 0 0 20px var(--accent-color-dark), 0 0 30px #1f6feb;
+        text-shadow: 0 0 10px var(--accent-color), 0 0 20px var(--accent-color), 0 0 30px #1f6feb;
     }
     to {
-        text-shadow: 0 0 20px var(--accent-color-dark), 0 0 30px #1f6feb, 0 0 40px #1f6feb;
+        text-shadow: 0 0 20px var(--accent-color), 0 0 30px #1f6feb, 0 0 40px #1f6feb;
     }
 }
 </style>
@@ -115,7 +117,7 @@ const themeToggle = document.getElementById('themeToggle');
 const body = document.body;
 
 themeToggle.addEventListener('click', () => {
-    if (body.hasAttribute('data-theme')) {
+    if (body.getAttribute('data-theme') === 'light') {
         body.removeAttribute('data-theme');
     } else {
         body.setAttribute('data-theme', 'light');
