@@ -40,31 +40,37 @@ body {
     overflow: hidden;
     transition: background-color 0.3s, color 0.3s;
 }
+
 h1 {
     font-size: 3rem;
     margin: 0;
     color: var(--accent-color);
     animation: glow 1.5s infinite alternate;
 }
+
 p {
     font-size: 1.2rem;
     margin: 1rem 0;
     color: var(--secondary-text);
 }
+
 footer {
     margin-top: 2rem;
     font-size: 0.9rem;
     color: var(--footer-color);
 }
+
 footer strong {
     color: var(--accent-color);
 }
+
 img, .gif {
     max-width: 100%;
     height: auto;
     margin: 1rem 0;
     border-radius: 10px;
 }
+
 .switch {
     position: absolute;
     top: 20px;
@@ -79,6 +85,7 @@ img, .gif {
     height: 25px;
     transition: background-color 0.3s;
 }
+
 .switch-circle {
     background-color: var(--bg-color);
     border-radius: 50%;
@@ -86,12 +93,11 @@ img, .gif {
     width: 20px;
     transition: transform 0.3s, background-color 0.3s;
 }
-[data-theme="light"] .switch {
-    background-color: var(--accent-color);
-}
+
 [data-theme="light"] .switch-circle {
     transform: translateX(25px);
 }
+
 @keyframes glow {
     from {
         text-shadow: 0 0 10px var(--accent-color), 0 0 20px var(--accent-color), 0 0 30px #1f6feb;
@@ -113,15 +119,20 @@ img, .gif {
 <p>Deployed by <strong>web.cipher</strong></p>
 </footer>
 <script>
-const themeToggle = document.getElementById('themeToggle');
-const body = document.body;
+document.addEventListener("DOMContentLoaded", () => {
+    const themeToggle = document.getElementById('themeToggle');
+    const body = document.body;
 
-themeToggle.addEventListener('click', () => {
-    if (body.getAttribute('data-theme') === 'light') {
-        body.removeAttribute('data-theme');
-    } else {
-        body.setAttribute('data-theme', 'light');
-    }
+    // Initialize theme
+    const currentTheme = localStorage.getItem('theme') || 'dark';
+    body.setAttribute('data-theme', currentTheme);
+
+    // Toggle theme on click
+    themeToggle.addEventListener('click', () => {
+        const theme = body.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+        body.setAttribute('data-theme', theme);
+        localStorage.setItem('theme', theme); // Save preference
+    });
 });
 </script>
 </body>
